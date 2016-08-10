@@ -1,0 +1,71 @@
+{% load staticfiles %}
+<!-- Link to online resource full of Bootstrap files -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<!-- Link to Google online fonts -->
+<link href="https://googleapis.com/css?family=righteous" rel="stylesheet" type="text/css"/>
+<!-- Link to Google Ajax scripts -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<!-- Link to bootstrap javascript -->
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!-- Basic CSS from tutorial -->
+<link rel="stylesheet" type="text/css" href="{% static 'student/style.css' %}"/>
+
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <!-- Header -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#topNavBar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{% url 'student:index' %}">OpenCMIS</a>
+        </div>
+
+        <!-- Items -->
+        <div class="collapse navbar-collapse" id="topNavBar">
+            <ul class="nav navbar-nav"">
+                <li class="active">
+                    <a href="{% url 'student:index' %}">
+                        <span class="glyphicon glyphicon-education" area-hidden="true"></span>&nbsp;&nbsp;Students
+                    </a>
+                </li>
+                <li class="">
+                    <a href="{% url 'behaviour:index' %}">
+                        <span class="glyphicon glyphicon-flag" area-hidden="true"></span>&nbsp;&nbsp;Behaviour
+                    </a>
+                </li>
+                <li class="">
+                    <a href="{% url 'staff:index' %}">
+                        <span class="glyphicon glyphicon-user" area-hidden="true"></span>&nbsp;&nbsp;Staff
+                    </a>
+                </li>
+                <li class="">
+                    <a href="{% url 'room:index' %}">
+                        <span class="glyphicon glyphicon-bookmark" area-hidden="true"></span>&nbsp;&nbsp;Room
+                    </a>
+                </li>
+            </ul>
+
+            <form class="navbar-form navbar-left" role="search" method="get" action="#">
+                <div class="form-group">
+                    <input type="text" class="form-control" name="q" value="">
+                    <button type="submit" class="btn btn-default">Search</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</nav>
+
+<h1>Student Index</h1>
+{% if all_students %}
+    <ul>
+        {% for student in all_students %}
+        <li>
+            <a href="{% url 'student:update' student.id %}">{{student}}</a>
+        </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>There are no student records to display.</p>
+{% endif %}
